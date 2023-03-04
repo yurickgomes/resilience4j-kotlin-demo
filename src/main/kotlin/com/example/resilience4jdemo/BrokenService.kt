@@ -8,6 +8,6 @@ class BrokenService {
     suspend fun doSomething(): String {
         delay(500L)
 
-        throw RuntimeException("foo")
+        throw RuntimeException("Service down!")
     }
 }
