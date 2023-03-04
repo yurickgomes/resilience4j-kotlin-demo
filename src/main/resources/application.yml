@@ -1,0 +1,10 @@
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      minimumNumberOfCalls: 6
+      slidingWindowSize: 6
+      failureRateThreshold: 50
+      waitDurationInOpenState: 20s
+    instances:
+      demo:
+        baseConfig: default
