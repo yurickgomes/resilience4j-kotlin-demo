@@ -72,9 +72,8 @@ class CircuitBreakerController(
         return flow { emit(brokenService.doSomething()) }
             .circuitBreaker(circuitBreaker)
             .catch { e ->
-                if (e !is CallNotPermittedException) {
-                    throw e
-                }
+                println("fallback -> ${e.message}")
+                // you probably should handle coroutine cancellation
                 emit(fallbackService.doSomething())
             }
     }

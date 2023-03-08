@@ -1,6 +1,5 @@
 package com.example.resilience4jdemo
 
-import io.github.resilience4j.circuitbreaker.CallNotPermittedException
 import io.github.resilience4j.circuitbreaker.CircuitBreaker
 import io.github.resilience4j.kotlin.circuitbreaker.executeSuspendFunction
 
@@ -12,7 +11,8 @@ suspend fun <T> CircuitBreaker.executeSuspendFunctionWithFallback(
         this.executeSuspendFunction {
             block()
         }
-    } catch (e: CallNotPermittedException) {
+    } catch (e: Throwable) {
+        // you probably should handle coroutine cancellation
         println("fallback -> ${e.message}")
         fallback()
     }
